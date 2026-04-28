@@ -209,7 +209,7 @@ main::before {
      center 35% the visible region sits BELOW the rotation axis
      so Y expands in projection by ~1.5x. Source X = 1.5 × Y
      gives square projected cells. */
-  background-size: 24px 16px;
+  background-size: 24px 14px;
   transform: perspective(900px) rotateX(60deg);
   transform-origin: center 35%;
   /* Fade the far end of the floor so it doesn't fight with content. */
