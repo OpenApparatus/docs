@@ -21,17 +21,17 @@ The project is split across three repositories, each with a focused responsibili
 | [**unity**](https://github.com/OpenApparatus/unity) | Unity Package Manager (UPM) package consuming Core to spawn environments in scenes. | Unity developers. |
 
 ```
-┌──────────────────┐    ┌──────────────────┐
-│ OpenApparatus    │    │ OpenApparatus    │
-│ Studio (Avalonia)│    │ Unity (UPM)      │
-└────────┬─────────┘    └────────┬─────────┘
-         │                       │
-         └───────────┬───────────┘
-                     ▼
            ┌──────────────────┐
            │ OpenApparatus.   │
            │ Core (.NET lib)  │
-           └──────────────────┘
+           └────────▲─────────┘
+                    │
+         ┌──────────┴──────────┐
+         │                     │
+┌────────┴─────────┐   ┌───────┴──────────┐
+│ OpenApparatus    │   │ OpenApparatus    │
+│ Studio (Avalonia)│   │ Unity (UPM)      │
+└──────────────────┘   └──────────────────┘
 ```
 
 ## Where to go next
