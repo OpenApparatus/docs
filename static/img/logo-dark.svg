@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#3b86f2" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="OpenApparatus">
+  <rect x="3" y="3" width="18" height="18" rx="2"/>
+  <path d="M12 3 V10"/>
+  <path d="M12 14 V21"/>
+  <path d="M3 12 H8"/>
+  <path d="M12 12 H21"/>
+</svg>
