@@ -1,30 +1,236 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * OpenApparatus docs theme — mirrors the design tokens used by
+ * OpenApparatus Studio (src/OpenApparatus.Studio/Themes/Tokens.axaml)
+ * so the site reads as the same product family as the desktop app.
+ *
+ * Studio token → Infima variable mapping is intentional, not exhaustive:
+ * we map the surfaces, accent, text and border tokens that have a
+ * direct web equivalent, then use Studio's spacing / radius scale for
+ * borders and cards.
  */
 
-/* You can override the default Infima variables here. */
+/* ── Light theme ─────────────────────────────────────────────────── */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Accent — Studio AccentBrush #1F6FEB and its hover/press shades. */
+  --ifm-color-primary: #1f6feb;
+  --ifm-color-primary-dark: #1c5fc7;          /* Studio AccentHoverBrush */
+  --ifm-color-primary-darker: #1850b0;        /* Studio AccentPressBrush */
+  --ifm-color-primary-darkest: #14438f;
+  --ifm-color-primary-light: #4084ed;
+  --ifm-color-primary-lighter: #5594f0;
+  --ifm-color-primary-lightest: #93b9f6;
+
+  /* Surfaces — Studio Light theme. */
+  --ifm-background-color: #f7f8fa;            /* SurfacePrimary */
+  --ifm-background-surface-color: #ffffff;    /* SurfaceRaised */
+  --ifm-color-emphasis-0: #ffffff;
+  --ifm-color-emphasis-100: #f7f8fa;
+  --ifm-color-emphasis-200: #eceef3;          /* SurfaceSecondary */
+  --ifm-color-emphasis-300: #d3d7df;          /* BorderHairline */
+  --ifm-color-emphasis-400: #a8aebb;          /* BorderStrong */
+  --ifm-color-emphasis-600: #7a808c;          /* TextMuted */
+  --ifm-color-emphasis-700: #5a6270;          /* TextSecondary */
+  --ifm-color-emphasis-900: #23262e;          /* TextPrimary */
+
+  /* Text. */
+  --ifm-color-content: #23262e;
+  --ifm-color-content-secondary: #5a6270;
+  --ifm-heading-color: #23262e;
+  --ifm-link-color: var(--ifm-color-primary);
+
+  /* Borders & dividers. */
+  --ifm-toc-border-color: #d3d7df;
+  --ifm-hr-border-color: #d3d7df;
+
+  /* Code. */
+  --ifm-code-background: #eceef3;
+  --ifm-code-color: #23262e;
+  --ifm-code-font-size: 92%;
+  --ifm-code-padding-vertical: 0.15rem;
+  --ifm-code-padding-horizontal: 0.35rem;
+  --ifm-code-border-radius: 4px;              /* Studio CornerSm */
+  --docusaurus-highlighted-code-line-bg: rgba(31, 111, 235, 0.10);
+
+  /* Pre / code blocks — match Studio's dark "editor canvas". */
+  --prism-background-color: #1a1a1f;          /* Studio EditorBg */
+  --prism-color: #e5e7ec;
+
+  /* Navbar — raised surface, hairline bottom border. */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 1px 0 0 #d3d7df;
+  --ifm-navbar-link-color: #23262e;
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+
+  /* Footer — Studio status bar tone. */
+  --ifm-footer-background-color: #1a1a1f;     /* Studio EditorBg */
+  --ifm-footer-color: #e5e7ec;
+  --ifm-footer-link-color: #a8aebb;
+  --ifm-footer-link-hover-color: #ffffff;
+  --ifm-footer-title-color: #ffffff;
+
+  /* Studio scale — 4-px grid, small radii. */
+  --ifm-global-radius: 8px;                   /* CornerMd */
+  --ifm-button-border-radius: 4px;            /* CornerSm */
+  --ifm-alert-border-radius: 8px;
+  --ifm-card-border-radius: 8px;
+  --ifm-global-border-width: 1px;
+  --ifm-pre-border-radius: 8px;
+
+  /* Subtle elevation — Studio Elevation1. */
+  --ifm-global-shadow-lw: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  --ifm-global-shadow-md: 0 4px 14px 0 rgba(0, 0, 0, 0.12);
+  --ifm-global-shadow-tl: 0 6px 18px 0 rgba(0, 0, 0, 0.14);
+
+  /* Type — Studio favors a tight sans, monospace for code/data.
+     We keep Infima's system stack for body and switch the mono to
+     Consolas to match Studio's preview / numeric inputs. */
+  --ifm-font-family-monospace:
+    Consolas, "Courier New", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Liberation Mono, monospace;
+
+  /* Validity (admonitions / status pills) — Studio Valid / Invalid. */
+  --ifm-color-success: #28a05a;
+  --ifm-color-danger: #c82828;
+  --ifm-color-warning: #c89028;
+  --ifm-color-info: var(--ifm-color-primary);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ── Dark theme ──────────────────────────────────────────────────── */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Accent — Studio dark AccentBrush #3B86F2 (shifted lighter for
+     contrast against dark surfaces). */
+  --ifm-color-primary: #3b86f2;
+  --ifm-color-primary-dark: #1f6feb;
+  --ifm-color-primary-darker: #1c5fc7;
+  --ifm-color-primary-darkest: #1850b0;
+  --ifm-color-primary-light: #5a9bfa;          /* Studio AccentHover dark */
+  --ifm-color-primary-lighter: #7ab1fb;
+  --ifm-color-primary-lightest: #b0cdfc;
+
+  /* Surfaces — Studio Dark theme. */
+  --ifm-background-color: #1a1b20;            /* SurfacePrimary */
+  --ifm-background-surface-color: #23252c;    /* SurfaceRaised */
+  --ifm-color-emphasis-0: #15161b;
+  --ifm-color-emphasis-100: #1a1b20;
+  --ifm-color-emphasis-200: #23252c;
+  --ifm-color-emphasis-300: #2c2f37;          /* BorderHairline */
+  --ifm-color-emphasis-400: #454853;          /* BorderStrong */
+  --ifm-color-emphasis-600: #7a808c;
+  --ifm-color-emphasis-700: #a8aebb;
+  --ifm-color-emphasis-900: #e5e7ec;
+
+  /* Text. */
+  --ifm-color-content: #e5e7ec;
+  --ifm-color-content-secondary: #a8aebb;
+  --ifm-heading-color: #e5e7ec;
+
+  /* Borders & dividers. */
+  --ifm-toc-border-color: #2c2f37;
+  --ifm-hr-border-color: #2c2f37;
+
+  /* Code. */
+  --ifm-code-background: #15161b;             /* SurfaceSecondary */
+  --ifm-code-color: #e5e7ec;
+  --docusaurus-highlighted-code-line-bg: rgba(59, 134, 242, 0.18);
+
+  /* Pre / code blocks. */
+  --prism-background-color: #0f1014;          /* Studio EditorBg dark */
+
+  /* Navbar — raised dark surface. */
+  --ifm-navbar-background-color: #23252c;
+  --ifm-navbar-shadow: 0 1px 0 0 #2c2f37;
+  --ifm-navbar-link-color: #e5e7ec;
+
+  /* Footer — Studio status bar dark. */
+  --ifm-footer-background-color: #0b0c10;     /* StatusBg dark */
+  --ifm-footer-color: #a8aebb;
+  --ifm-footer-link-color: #a8aebb;
+  --ifm-footer-link-hover-color: #ffffff;
+  --ifm-footer-title-color: #ffffff;
+
+  /* Validity tuned for dark surfaces. */
+  --ifm-color-success: #3dd17a;
+  --ifm-color-danger: #f26060;
+  --ifm-color-warning: #f0b040;
+}
+
+/* ── Component-level polish ──────────────────────────────────────── */
+
+/* Hairline-bordered, slightly raised cards. */
+.card {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  box-shadow: none;
+}
+.card:hover {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+/* Tables — hairline borders, subtle zebra. */
+.theme-doc-markdown table {
+  border-collapse: collapse;
+  display: table;
+  width: 100%;
+}
+.theme-doc-markdown table thead tr {
+  background-color: var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+.theme-doc-markdown table th,
+.theme-doc-markdown table td {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Inline code — hairline border to feel like Studio's TextBox chip. */
+:not(pre) > code {
+  background-color: var(--ifm-code-background);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+}
+
+/* Code blocks — sit on Studio's "editor canvas" tone in both themes. */
+.theme-code-block,
+pre[class*="language-"] {
+  background-color: var(--prism-background-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* Buttons — sharper corners, more like Studio's accent button. */
+.button--primary {
+  background-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-dark);
+}
+.button--primary:active {
+  background-color: var(--ifm-color-primary-darker);
+}
+
+/* Sidebar — quiet hairline divider, accent only on active. */
+.menu__link {
+  border-radius: 4px;
+}
+.menu__link--active:not(.menu__link--sublist) {
+  background-color: rgba(31, 111, 235, 0.08);
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  background-color: rgba(59, 134, 242, 0.14);
+}
+
+/* Admonitions — match Studio's hairline + small radius look. */
+.theme-admonition {
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* Footer titles — uppercase mini-caps like Studio's status strips. */
+.footer__title {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
