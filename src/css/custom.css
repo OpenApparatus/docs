@@ -159,32 +159,84 @@
   --ifm-footer-title-color: #ffffff;
 }
 
-/* ── Page substrate: perspective grid behind everything ──────────── */
-html, body {
+/* ── Page substrate: 3D-projected perspective grid ───────────────── */
+/*
+   Strategy:
+     • html holds the solid canvas color
+     • body / __docusaurus / main-wrapper stay transparent so the grid
+       (rendered on <main>::before) is actually visible
+     • the grid lives INSIDE <main>, so navbar and sidebar are clean —
+       only the article column gets the floor
+     • <main> is given a 3D transform so the grid recedes into the
+       distance like a calibrated AR floor
+*/
+html {
   background-color: var(--ifm-background-color);
 }
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(16, 185, 129, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(16, 185, 129, 0.15) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-[data-theme='dark'] body::before {
-  background-image:
-    linear-gradient(to right, rgba(52, 211, 153, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
+body,
+#__docusaurus,
+.main-wrapper,
+[class*='docPage_'] {
+  background-color: transparent !important;
 }
 
-/* Tilted perspective grid — for hero / showcase areas. Apply via class. */
+main {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+main > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* The floor grid: a large plane positioned behind the article and
+   tilted backward so it reads as a perspective floor receding to a
+   vanishing point near the top of the column. */
+main::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(16, 185, 129, 0.28) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.28) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(900px) rotateX(60deg);
+  transform-origin: center 35%;
+  /* Fade the far end of the floor so it doesn't fight with content. */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 30%,
+    rgba(0, 0, 0, 1) 65%,
+    rgba(0, 0, 0, 0.4) 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 30%,
+    rgba(0, 0, 0, 1) 65%,
+    rgba(0, 0, 0, 0.4) 95%,
+    transparent 100%
+  );
+}
+[data-theme='dark'] main::before {
+  background-image:
+    linear-gradient(to right, rgba(52, 211, 153, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.18) 1px, transparent 1px);
+}
+
+/* Tilted perspective grid utility — for hero / showcase areas. */
 .spatial-grid--perspective {
   background-image:
-    linear-gradient(to right, rgba(16, 185, 129, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+    linear-gradient(to right, rgba(16, 185, 129, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.22) 1px, transparent 1px);
   background-size: 60px 60px;
   transform: perspective(1000px) rotateX(60deg);
   transform-origin: center top;
@@ -426,6 +478,18 @@ pre[class*="language-"] {
 .button--secondary:hover {
   border-color: #10b981;
   color: #064e3b;
+}
+
+/* ── Sidebar container — glass HUD pane, hairline border ─────────── */
+.theme-doc-sidebar-container {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(52, 211, 153, 0.4);
+}
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background-color: rgba(2, 44, 34, 0.6);
+  border-right-color: rgba(52, 211, 153, 0.3);
 }
 
 /* ── Sidebar — Space Mono labels, emerald active highlight ───────── */
