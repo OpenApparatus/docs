@@ -79,6 +79,12 @@ const config: Config = {
           label: 'Unity',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'designSidebar',
+          position: 'left',
+          label: 'Design',
+        },
+        {
           href: 'https://github.com/OpenApparatus',
           label: 'GitHub',
           position: 'right',
@@ -96,6 +102,7 @@ const config: Config = {
             {label: 'Core', to: '/core/overview'},
             {label: 'Studio', to: '/studio/overview'},
             {label: 'Unity', to: '/unity/overview'},
+            {label: 'Design system', to: '/design-system/overview'},
           ],
         },
         {

@@ -1,304 +1,498 @@
 /**
- * OpenApparatus docs theme.
+ * OpenApparatus docs — "AR HUD" theme.
  *
- * Apparatus / instrument palette:
- *   structure  → neutral grays (#404040 light, #A3A3A3 dark)
- *   ink        → near-black #171717
- *   accent     → orange #F97316  (sparingly: active, interactive,
- *                                  focus, traversal — never decorative)
- *   surface    → off-white #FAFAFA / near-black #171717
- *   secondary  → mid neutral #737373
+ *   Concept: spatial-computing lens. The interface is a glass HUD
+ *   floating over a perspective grid, projecting rigorous geometry
+ *   onto the physical world. Clinical mint canvas, emerald accents,
+ *   monospace HUD typography.
  *
- * All grays are TRUE neutrals (no blue / cool tint) so the dark
- * surfaces read as instrument-panel dark gray, not navy.
- *
- * Rules of the system:
- *   • Orange is reserved for *meaningful* signals (≤ ~15% visual weight).
- *   • Structure (gray) dominates; ink anchors content.
- *   • No gradients, no glow, no warm backgrounds.
- *   • Hairline borders, tight (1–2px) shadows only.
+ *   Palette:    emerald-50…950 (Tailwind defaults)
+ *   Body type:  Inter (400/600/700)
+ *   HUD type:   Space Mono (400/700, uppercase, tracked-out)
+ *   Surfaces:   glassmorphism — translucent + backdrop-blur
+ *   Background: subtle perspective grid, emerald-500 @ 15% opacity
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 /* ── Light theme ─────────────────────────────────────────────────── */
 :root {
-  /* Accent — orange signal. Used by Infima for active states, focus
-     rings, the active sidebar item, and primary buttons. Body link
-     color is overridden below so links don't all read as accent. */
-  --ifm-color-primary: #f97316;
-  --ifm-color-primary-dark: #ea670e;
-  --ifm-color-primary-darker: #de610d;
-  --ifm-color-primary-darkest: #b54f0a;
-  --ifm-color-primary-light: #fb8332;
-  --ifm-color-primary-lighter: #fb8b41;
-  --ifm-color-primary-lightest: #fda66f;
+  /* Accent — emerald-500 primary, emerald-600 deep, emerald-400 hover. */
+  --ifm-color-primary: #059669;            /* emerald-600 (deep accent) */
+  --ifm-color-primary-dark: #047857;
+  --ifm-color-primary-darker: #036648;
+  --ifm-color-primary-darkest: #022c22;
+  --ifm-color-primary-light: #10b981;       /* emerald-500 (primary) */
+  --ifm-color-primary-lighter: #34d399;     /* emerald-400 (hover) */
+  --ifm-color-primary-lightest: #6ee7b7;
 
-  /* Surfaces — instrument-panel off-white. */
-  --ifm-background-color: #fafafa;
-  --ifm-background-surface-color: #ffffff;
+  /* Surfaces — clinical mint canvas. */
+  --ifm-background-color: #ecfdf5;          /* emerald-50 (canvas) */
+  --ifm-background-surface-color: rgba(255, 255, 255, 0.7); /* glass */
+
   --ifm-color-emphasis-0: #ffffff;
-  --ifm-color-emphasis-100: #fafafa;
-  --ifm-color-emphasis-200: #f5f5f5;
-  --ifm-color-emphasis-300: #e5e5e5;            /* hairline borders */
-  --ifm-color-emphasis-400: #d4d4d4;
-  --ifm-color-emphasis-600: #737373;            /* secondary neutral */
-  --ifm-color-emphasis-700: #525252;
-  --ifm-color-emphasis-900: #171717;            /* ink */
+  --ifm-color-emphasis-100: #ecfdf5;
+  --ifm-color-emphasis-200: #d1fae5;        /* emerald-100 */
+  --ifm-color-emphasis-300: rgba(52, 211, 153, 0.4);  /* glass border */
+  --ifm-color-emphasis-400: rgba(16, 185, 129, 0.6);
+  --ifm-color-emphasis-600: #047857;        /* emerald-700 (muted) */
+  --ifm-color-emphasis-700: rgba(6, 95, 70, 0.8);     /* secondary text */
+  --ifm-color-emphasis-900: #022c22;        /* emerald-950 (ink) */
 
-  /* Text — ink for primary, mid-gray for secondary. */
-  --ifm-color-content: #171717;
-  --ifm-color-content-secondary: #737373;
-  --ifm-heading-color: #171717;
+  /* Text. */
+  --ifm-color-content: #064e3b;             /* emerald-900 */
+  --ifm-color-content-secondary: rgba(6, 95, 70, 0.8);
+  --ifm-heading-color: #022c22;             /* emerald-950 */
 
-  /* Links — keep body links neutral by default; orange on hover only
-     so the accent stays meaningful. See .markdown a override below. */
-  --ifm-link-color: #171717;
-  --ifm-link-hover-color: #f97316;
+  /* Body links — emerald deep with mono-style underline; hover lights up. */
+  --ifm-link-color: #047857;                /* emerald-700 */
+  --ifm-link-hover-color: #10b981;          /* emerald-500 */
 
   /* Borders & dividers. */
-  --ifm-toc-border-color: #e5e5e5;
-  --ifm-hr-border-color: #e5e5e5;
+  --ifm-toc-border-color: rgba(52, 211, 153, 0.4);
+  --ifm-hr-border-color: rgba(52, 211, 153, 0.4);
 
   /* Code. */
-  --ifm-code-background: #f5f5f5;
-  --ifm-code-color: #171717;
-  --ifm-code-font-size: 92%;
+  --ifm-code-background: rgba(255, 255, 255, 0.6);
+  --ifm-code-color: #064e3b;
+  --ifm-code-font-size: 90%;
   --ifm-code-padding-vertical: 0.15rem;
-  --ifm-code-padding-horizontal: 0.35rem;
+  --ifm-code-padding-horizontal: 0.4rem;
   --ifm-code-border-radius: 4px;
-  --docusaurus-highlighted-code-line-bg: rgba(249, 115, 22, 0.10);
+  --docusaurus-highlighted-code-line-bg: rgba(16, 185, 129, 0.12);
 
-  /* Pre / code blocks — dark instrument console. */
-  --prism-background-color: #171717;
-  --prism-color: #fafafa;
+  /* Pre / code blocks — deep emerald console. */
+  --prism-background-color: #022c22;
+  --prism-color: #d1fae5;
 
-  /* Navbar — clean off-white panel with hairline. */
-  --ifm-navbar-background-color: #ffffff;
-  --ifm-navbar-shadow: 0 1px 0 0 #e5e5e5;
-  --ifm-navbar-link-color: #404040;
-  --ifm-navbar-link-hover-color: #f97316;
+  /* Navbar — glass HUD strip across the top. */
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.7);
+  --ifm-navbar-shadow: 0 8px 32px rgba(4, 120, 87, 0.05);
+  --ifm-navbar-link-color: #064e3b;
+  --ifm-navbar-link-hover-color: #10b981;
 
-  /* Footer — ink, status-strip across the bottom. */
-  --ifm-footer-background-color: #171717;
-  --ifm-footer-color: #d4d4d4;
-  --ifm-footer-link-color: #a3a3a3;
+  /* Footer — emerald-950 status strip. */
+  --ifm-footer-background-color: #022c22;
+  --ifm-footer-color: #d1fae5;
+  --ifm-footer-link-color: #6ee7b7;
   --ifm-footer-link-hover-color: #ffffff;
   --ifm-footer-title-color: #ffffff;
 
-  /* Geometry — small radii, hairline borders. */
-  --ifm-global-radius: 6px;
+  /* Geometry — sharper radii, hairline borders. */
+  --ifm-global-radius: 4px;
   --ifm-button-border-radius: 4px;
-  --ifm-alert-border-radius: 6px;
-  --ifm-card-border-radius: 6px;
+  --ifm-alert-border-radius: 4px;
+  --ifm-card-border-radius: 4px;
   --ifm-global-border-width: 1px;
-  --ifm-pre-border-radius: 6px;
+  --ifm-pre-border-radius: 4px;
 
-  /* Tight, instrument-like shadows. No fluffy elevation. */
-  --ifm-global-shadow-lw: 0 1px 0 0 rgba(23, 23, 23, 0.05);
-  --ifm-global-shadow-md: 0 1px 2px 0 rgba(23, 23, 23, 0.08);
-  --ifm-global-shadow-tl: 0 2px 4px 0 rgba(23, 23, 23, 0.10);
+  /* HUD-soft shadows. */
+  --ifm-global-shadow-lw: 0 1px 0 0 rgba(4, 120, 87, 0.06);
+  --ifm-global-shadow-md: 0 8px 32px rgba(4, 120, 87, 0.08);
+  --ifm-global-shadow-tl: 0 12px 40px rgba(4, 120, 87, 0.12);
 
-  /* Mono font for code / data. */
+  /* Type stacks. */
+  --ifm-font-family-base:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
   --ifm-font-family-monospace:
-    Consolas, "Courier New", ui-monospace, SFMono-Regular,
-    Menlo, Monaco, Liberation Mono, monospace;
+    'Space Mono', Consolas, 'Courier New', ui-monospace,
+    SFMono-Regular, Menlo, Monaco, Liberation Mono, monospace;
+  --ifm-heading-font-family: 'Inter', sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-font-weight-bold: 700;
+  --ifm-font-weight-semibold: 600;
 
-  /* Validity — neutral, not warm-tinted, so orange stays meaningful. */
-  --ifm-color-success: #22c55e;
-  --ifm-color-danger: #ef4444;
-  --ifm-color-warning: #eab308;
-  --ifm-color-info: #737373;
+  /* Validity — held in emerald family for theme cohesion; reds kept
+     so danger admonitions still warn. */
+  --ifm-color-success: #10b981;
+  --ifm-color-info: #34d399;
+  --ifm-color-warning: #f59e0b;
+  --ifm-color-danger: #dc2626;
 }
 
-/* ── Dark theme ──────────────────────────────────────────────────── */
+/* ── Dark theme — deep emerald lab console ───────────────────────── */
 [data-theme='dark'] {
-  /* Accent unchanged — orange recognition is consistent across modes. */
-  --ifm-color-primary: #f97316;
-  --ifm-color-primary-dark: #ea670e;
-  --ifm-color-primary-darker: #de610d;
-  --ifm-color-primary-darkest: #b54f0a;
-  --ifm-color-primary-light: #fb8332;
-  --ifm-color-primary-lighter: #fb8b41;
-  --ifm-color-primary-lightest: #fda66f;
+  --ifm-color-primary: #34d399;             /* emerald-400 (brighter for dark) */
+  --ifm-color-primary-dark: #10b981;
+  --ifm-color-primary-darker: #059669;
+  --ifm-color-primary-darkest: #047857;
+  --ifm-color-primary-light: #6ee7b7;
+  --ifm-color-primary-lighter: #a7f3d0;
+  --ifm-color-primary-lightest: #d1fae5;
 
-  /* Surfaces — true neutral dark grays. No blue tint. */
-  --ifm-background-color: #171717;             /* page bg */
-  --ifm-background-surface-color: #262626;     /* raised */
-  --ifm-color-emphasis-0: #0a0a0a;
-  --ifm-color-emphasis-100: #171717;
-  --ifm-color-emphasis-200: #262626;
-  --ifm-color-emphasis-300: #404040;            /* hairline borders */
-  --ifm-color-emphasis-400: #525252;
-  --ifm-color-emphasis-600: #a3a3a3;            /* structural gray (lighter for dark) */
-  --ifm-color-emphasis-700: #d4d4d4;
-  --ifm-color-emphasis-900: #fafafa;
+  --ifm-background-color: #022c22;          /* emerald-950 canvas */
+  --ifm-background-surface-color: rgba(2, 44, 34, 0.7);
+  --ifm-color-emphasis-0: #011611;
+  --ifm-color-emphasis-100: #022c22;
+  --ifm-color-emphasis-200: #064e3b;
+  --ifm-color-emphasis-300: rgba(52, 211, 153, 0.3);
+  --ifm-color-emphasis-400: rgba(52, 211, 153, 0.5);
+  --ifm-color-emphasis-600: #6ee7b7;
+  --ifm-color-emphasis-700: #a7f3d0;
+  --ifm-color-emphasis-900: #ecfdf5;
 
-  --ifm-color-content: #fafafa;
-  --ifm-color-content-secondary: #a3a3a3;
-  --ifm-heading-color: #fafafa;
+  --ifm-color-content: #ecfdf5;
+  --ifm-color-content-secondary: #6ee7b7;
+  --ifm-heading-color: #d1fae5;
 
-  --ifm-link-color: #fafafa;
-  --ifm-link-hover-color: #f97316;
+  --ifm-link-color: #6ee7b7;
+  --ifm-link-hover-color: #34d399;
 
-  --ifm-toc-border-color: #404040;
-  --ifm-hr-border-color: #404040;
+  --ifm-toc-border-color: rgba(52, 211, 153, 0.3);
+  --ifm-hr-border-color: rgba(52, 211, 153, 0.3);
 
-  --ifm-code-background: #262626;
-  --ifm-code-color: #fafafa;
-  --docusaurus-highlighted-code-line-bg: rgba(249, 115, 22, 0.18);
+  --ifm-code-background: rgba(0, 0, 0, 0.35);
+  --ifm-code-color: #d1fae5;
+  --docusaurus-highlighted-code-line-bg: rgba(52, 211, 153, 0.18);
 
-  --prism-background-color: #0a0a0a;
+  --prism-background-color: #011611;
 
-  --ifm-navbar-background-color: #262626;
-  --ifm-navbar-shadow: 0 1px 0 0 #404040;
-  --ifm-navbar-link-color: #d4d4d4;
+  --ifm-navbar-background-color: rgba(2, 44, 34, 0.7);
+  --ifm-navbar-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --ifm-navbar-link-color: #d1fae5;
 
-  --ifm-footer-background-color: #0a0a0a;
-  --ifm-footer-color: #a3a3a3;
-  --ifm-footer-link-color: #a3a3a3;
+  --ifm-footer-background-color: #011611;
+  --ifm-footer-color: #6ee7b7;
+  --ifm-footer-link-color: #6ee7b7;
   --ifm-footer-link-hover-color: #ffffff;
   --ifm-footer-title-color: #ffffff;
-
-  --ifm-color-success: #4ade80;
-  --ifm-color-danger: #f87171;
-  --ifm-color-warning: #facc15;
 }
 
-/* ── Component polish ────────────────────────────────────────────── */
-
-/* Cards — hairline border, no shadow. Instrument, not consumer. */
-.card {
-  background-color: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  box-shadow: none;
+/* ── Page substrate: perspective grid behind everything ──────────── */
+html, body {
+  background-color: var(--ifm-background-color);
 }
-.card:hover {
-  border-color: var(--ifm-color-emphasis-400);
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(16, 185, 129, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+[data-theme='dark'] body::before {
+  background-image:
+    linear-gradient(to right, rgba(52, 211, 153, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
 }
 
-/* Tables — full hairline grid. */
+/* Tilted perspective grid — for hero / showcase areas. Apply via class. */
+.spatial-grid--perspective {
+  background-image:
+    linear-gradient(to right, rgba(16, 185, 129, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(1000px) rotateX(60deg);
+  transform-origin: center top;
+}
+
+/* ── Glass HUD: navbar ───────────────────────────────────────────── */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 8px 32px rgba(4, 120, 87, 0.05);
+}
+[data-theme='dark'] .navbar {
+  background-color: rgba(2, 44, 34, 0.7);
+  border-bottom-color: rgba(52, 211, 153, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Navbar links: Space Mono, uppercase, tracked-out — HUD readout style. */
+.navbar__link,
+.navbar__brand,
+.navbar__title {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.navbar__title { letter-spacing: 0.1em; }
+
+/* ── Glass HUD: cards / admonitions / TOC ────────────────────────── */
+.card,
+.theme-admonition,
+.pagination-nav__link {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 8px 32px rgba(4, 120, 87, 0.05);
+  border-radius: 4px;
+}
+[data-theme='dark'] .card,
+[data-theme='dark'] .theme-admonition,
+[data-theme='dark'] .pagination-nav__link {
+  background-color: rgba(2, 44, 34, 0.7);
+  border-color: rgba(52, 211, 153, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Targeting crosshairs on prominent panels ────────────────────── */
+.hud-panel,
+.theme-admonition {
+  position: relative;
+  padding: 1.25rem;
+}
+.hud-panel::before,
+.hud-panel::after,
+.theme-admonition::before,
+.theme-admonition::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #10b981;
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+.hud-panel::before,
+.theme-admonition::before {
+  top: -1px; left: -1px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.hud-panel::after,
+.theme-admonition::after {
+  bottom: -1px; right: -1px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+/* Add the other two corners via a wrapping box-shadow trick: an inner
+   container holding the corner brackets at top-right and bottom-left. */
+.hud-panel > .hud-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hud-panel > .hud-corners::before,
+.hud-panel > .hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #10b981;
+}
+.hud-panel > .hud-corners::before {
+  top: -1px; right: -1px;
+  border-left: 0; border-bottom: 0;
+}
+.hud-panel > .hud-corners::after {
+  bottom: -1px; left: -1px;
+  border-top: 0; border-right: 0;
+}
+
+/* ── Status indicator dot — pulses to imply live telemetry ───────── */
+.hud-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  animation: hud-pulse 2s ease-in-out infinite;
+}
+.hud-dot--square { border-radius: 0; }
+@keyframes hud-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+/* ── HUD label: Space Mono, uppercase, tracked-out ───────────────── */
+.hud-label {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* ── Footer titles — already mini-cap, push to Space Mono ────────── */
+.footer__title {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.footer__link-item {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+.footer--dark {
+  --ifm-footer-background-color: #022c22;
+  --ifm-footer-color: #d1fae5;
+  --ifm-footer-link-color: #6ee7b7;
+  --ifm-footer-link-hover-color: #ffffff;
+  --ifm-footer-title-color: #ffffff;
+}
+[data-theme='dark'] .footer--dark {
+  --ifm-footer-background-color: #011611;
+}
+
+/* ── Tables — hairline emerald grid ──────────────────────────────── */
 .theme-doc-markdown table {
   border-collapse: collapse;
   display: table;
   width: 100%;
 }
 .theme-doc-markdown table thead tr {
-  background-color: var(--ifm-color-emphasis-200);
-  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.4);
+}
+[data-theme='dark'] .theme-doc-markdown table thead tr {
+  background-color: rgba(2, 44, 34, 0.5);
+}
+.theme-doc-markdown table th {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .theme-doc-markdown table th,
 .theme-doc-markdown table td {
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid rgba(52, 211, 153, 0.4);
   padding: 0.5rem 0.75rem;
 }
-
-/* Inline code — hairline chip. */
-:not(pre) > code {
-  background-color: var(--ifm-code-background);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 4px;
+[data-theme='dark'] .theme-doc-markdown table th,
+[data-theme='dark'] .theme-doc-markdown table td {
+  border-color: rgba(52, 211, 153, 0.3);
 }
 
-/* Code blocks — dark console in both themes. */
+/* ── Inline code — glass chip with emerald edge ──────────────────── */
+:not(pre) > code {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 4px;
+}
+[data-theme='dark'] :not(pre) > code {
+  background-color: rgba(0, 0, 0, 0.35);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* ── Code blocks — Glass HUD console (translucent deep emerald) ──── */
 .theme-code-block,
 pre[class*="language-"] {
-  background-color: var(--prism-background-color) !important;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  background-color: rgba(2, 44, 34, 0.85) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 8px 32px rgba(4, 120, 87, 0.08);
+}
+[data-theme='dark'] .theme-code-block,
+[data-theme='dark'] pre[class*="language-"] {
+  background-color: rgba(1, 22, 17, 0.85) !important;
+  border-color: rgba(52, 211, 153, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Primary button — the orange CTA. White text for legibility. */
+/* ── Buttons — primary CTA in emerald-600 ────────────────────────── */
 .button--primary {
-  background-color: var(--ifm-color-primary);
-  border-color: var(--ifm-color-primary);
+  background-color: #059669;
+  border-color: #059669;
   color: #ffffff;
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .button--primary:hover {
-  background-color: var(--ifm-color-primary-dark);
-  border-color: var(--ifm-color-primary-dark);
+  background-color: #047857;
+  border-color: #047857;
   color: #ffffff;
 }
-.button--primary:active {
-  background-color: var(--ifm-color-primary-darker);
-  color: #ffffff;
-}
-
-/* Secondary button — neutral until hover. */
 .button--secondary {
-  background-color: transparent;
-  border-color: var(--ifm-color-emphasis-400);
-  color: var(--ifm-color-content);
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: #064e3b;
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .button--secondary:hover {
-  border-color: var(--ifm-color-content);
+  border-color: #10b981;
+  color: #064e3b;
 }
 
-/* Sidebar — orange tint reserved for the active item. */
+/* ── Sidebar — Space Mono labels, emerald active highlight ───────── */
 .menu__link {
   border-radius: 4px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+.menu__list-item-collapsible .menu__link--sublist,
+.menu__link--sublist {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
 }
 .menu__link--active:not(.menu__link--sublist) {
-  background-color: rgba(249, 115, 22, 0.10);
-  color: var(--ifm-color-primary);
-  font-weight: 500;
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  font-weight: 600;
 }
 [data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
-  background-color: rgba(249, 115, 22, 0.18);
+  background-color: rgba(52, 211, 153, 0.18);
+  color: #34d399;
 }
 
-/* Admonitions — match the hairline + small-radius system. */
-.theme-admonition {
-  border-radius: 6px;
-  border: 1px solid var(--ifm-color-emphasis-300);
-}
-
-/* Footer — scoped so `themeConfig.footer.style: 'dark'` doesn't
-   reintroduce Infima's built-in `--dark` palette (#303846 — blue-tinted). */
-.footer--dark {
-  --ifm-footer-background-color: #171717;
-  --ifm-footer-color: #d4d4d4;
-  --ifm-footer-link-color: #a3a3a3;
-  --ifm-footer-link-hover-color: #ffffff;
-  --ifm-footer-title-color: #ffffff;
-}
-[data-theme='dark'] .footer--dark {
-  --ifm-footer-background-color: #0a0a0a;
-}
-
-/* Footer titles — uppercase mini-caps, status-strip vibe. */
-.footer__title {
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-/* Body links: ink with a quiet underline; orange only on hover.
-   This keeps orange sparse — paragraphs of links don't shout. */
-.markdown a:not(.card):not(.button):not(.menu__link) {
-  color: var(--ifm-link-color);
-  text-decoration: underline;
-  text-decoration-color: var(--ifm-color-emphasis-400);
-  text-underline-offset: 2px;
-}
-.markdown a:not(.card):not(.button):not(.menu__link):hover {
-  color: var(--ifm-color-primary);
-  text-decoration-color: var(--ifm-color-primary);
-}
-
-/* Breadcrumb active item — orange-tinted chip (active = signal). */
+/* ── Breadcrumbs — emerald active chip ───────────────────────────── */
 .breadcrumbs__link--active,
 .breadcrumbs__item--active .breadcrumbs__link {
-  background-color: rgba(249, 115, 22, 0.10);
-  color: var(--ifm-color-primary);
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #059669;
 }
 [data-theme='dark'] .breadcrumbs__link--active,
 [data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
-  background-color: rgba(249, 115, 22, 0.18);
+  background-color: rgba(52, 211, 153, 0.18);
+  color: #34d399;
 }
 
-/* Pagination next/prev — restrained. */
-.pagination-nav__link {
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 6px;
+/* ── Headings — Inter for prose. H4-H6 take Space Mono uppercase ── */
+h1, h2, h3 {
+  font-family: var(--ifm-font-family-base);
+  letter-spacing: -0.01em;
 }
-.pagination-nav__link:hover {
-  border-color: var(--ifm-color-primary);
+h4, h5, h6 {
+  font-family: var(--ifm-font-family-monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Body links — quiet underline, emerald on hover ──────────────── */
+.markdown a:not(.card):not(.button):not(.menu__link) {
+  color: var(--ifm-link-color);
+  text-decoration: underline;
+  text-decoration-color: rgba(16, 185, 129, 0.4);
+  text-underline-offset: 3px;
+}
+.markdown a:not(.card):not(.button):not(.menu__link):hover {
+  color: var(--ifm-color-primary-light);
+  text-decoration-color: var(--ifm-color-primary-light);
+}
+
+/* ── Color swatch utility for the design-system docs ─────────────── */
+.swatch {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-right: 0.5rem;
+  vertical-align: -0.25rem;
 }

@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="OpenApparatus">
-  <g stroke="#404040" stroke-width="1.75">
+  <g stroke="#064e3b" stroke-width="1.75">
     <rect x="3" y="3" width="18" height="18" rx="2"/>
     <path d="M12 3 V10"/>
     <path d="M12 14 V21"/>
     <path d="M3 12 H8"/>
     <path d="M12 12 H21"/>
   </g>
-  <path stroke="#f97316" stroke-width="1.75" d="M16 7 L16 11 L10 11 L10 17"/>
+  <path stroke="#10b981" stroke-width="1.75" d="M16 7 L16 11 L10 11 L10 17"/>
 </svg>

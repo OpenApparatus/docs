@@ -53,6 +53,21 @@ const sidebars: SidebarsConfig = {
     },
     'contributing',
   ],
+  designSidebar: [
+    {
+      type: 'category',
+      label: 'Design system',
+      link: {type: 'doc', id: 'design-system/overview'},
+      items: [
+        'design-system/palette',
+        'design-system/typography',
+        'design-system/primitives',
+        'design-system/microcopy',
+        'design-system/implementation',
+      ],
+    },
+    'contributing',
+  ],
 };
 
 export default sidebars;
