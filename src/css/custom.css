@@ -203,14 +203,12 @@ main::before {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(to right, rgba(16, 185, 129, 0.18) 0.5px, transparent 0.5px),
-    linear-gradient(to bottom, rgba(16, 185, 129, 0.18) 0.5px, transparent 0.5px);
-  /* Source aspect ratio tuned empirically: cos(60°) orthographic
-     math says 1:2 should project as squares, but perspective
-     distance softens that — 1:1.43 reads as squarer in practice.
-     Lower the second number if cells still look tall, raise it
-     if they look wide. */
-  background-size: 28px 40px;
+    linear-gradient(to right, rgba(16, 185, 129, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.14) 1px, transparent 1px);
+  /* Source aspect tuned empirically: cells project ≈ square at
+     this depth. Lower second number if cells still look tall;
+     raise it if they look wide. */
+  background-size: 24px 32px;
   transform: perspective(900px) rotateX(60deg);
   transform-origin: center 35%;
   /* Fade the far end of the floor so it doesn't fight with content. */
@@ -233,8 +231,8 @@ main::before {
 }
 [data-theme='dark'] main::before {
   background-image:
-    linear-gradient(to right, rgba(52, 211, 153, 0.12) 0.5px, transparent 0.5px),
-    linear-gradient(to bottom, rgba(52, 211, 153, 0.12) 0.5px, transparent 0.5px);
+    linear-gradient(to right, rgba(52, 211, 153, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.08) 1px, transparent 1px);
 }
 
 /* Tilted perspective grid utility — for hero / showcase areas. */
