@@ -124,7 +124,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} OpenApparatus contributors. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.github,
+      theme: prismThemes.vsDark,
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['csharp', 'json', 'bash', 'powershell'],
     },
