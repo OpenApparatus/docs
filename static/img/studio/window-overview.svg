@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" role="img" aria-labelledby="title desc" font-family="Inter, -apple-system, Segoe UI, Roboto, sans-serif">
+  <title id="title">OpenApparatus Studio — window layout</title>
+  <desc id="desc">Annotated diagram of the Studio main window: top toolbar, three-pane body (left panel, canvas, right panel), and status bar.</desc>
+
+  <defs>
+    <!-- Subtle vignette behind the window so it reads as elevated on both light and dark page backgrounds. -->
+    <radialGradient id="bg" cx="50%" cy="40%" r="65%">
+      <stop offset="0%"   stop-color="#ecfdf5" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#d1fae5" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="canvasFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0fdfa"/>
+      <stop offset="100%" stop-color="#ecfdf5"/>
+    </linearGradient>
+    <linearGradient id="titleBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(6,95,70,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <style>
+    .label       { font-size: 11px; fill: #064e3b; font-weight: 600; letter-spacing: 0.04em; }
+    .caption     { font-size: 10px; fill: rgba(6,95,70,0.75); }
+    .leader      { stroke: rgba(6,95,70,0.5); stroke-width: 1; fill: none; stroke-dasharray: 2 3; }
+    .panel-title { font-size: 10px; fill: #064e3b; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .row-label   { font-size: 9.5px; fill: rgba(6,95,70,0.85); }
+    .row-value   { font-size: 9.5px; fill: #064e3b; font-weight: 600; }
+    .toolbar-grp { font-size: 9px; fill: #064e3b; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .status      { font-size: 10px; fill: #064e3b; font-family: 'Space Mono', Consolas, monospace; }
+    .accent-dot  { fill: #10b981; }
+  </style>
+
+  <!-- Page background -->
+  <rect width="960" height="620" fill="url(#bg)"/>
+
+  <!-- ============== Window chrome ============== -->
+  <g transform="translate(80,52)">
+    <!-- Window outline + soft shadow -->
+    <rect x="0" y="0" width="800" height="500" rx="6" ry="6" fill="#ffffff" stroke="rgba(52,211,153,0.45)" stroke-width="1"/>
+    <rect x="0" y="0" width="800" height="500" rx="6" ry="6" fill="none" stroke="rgba(4,120,87,0.08)" stroke-width="6"/>
+
+    <!-- Title bar -->
+    <rect x="0" y="0" width="800" height="28" rx="6" ry="6" fill="url(#titleBar)" stroke="rgba(52,211,153,0.35)" stroke-width="1"/>
+    <rect x="0" y="22" width="800" height="6" fill="url(#titleBar)"/>
+    <!-- Traffic lights -->
+    <circle cx="14" cy="14" r="4" fill="#fb7185"/>
+    <circle cx="28" cy="14" r="4" fill="#fbbf24"/>
+    <circle cx="42" cy="14" r="4" fill="#34d399"/>
+    <text x="400" y="18" text-anchor="middle" font-size="10" fill="rgba(6,95,70,0.7)" font-weight="600">OpenApparatus Studio  —  open-field-arena.oapp</text>
+
+    <!-- ============== Top toolbar ============== -->
+    <g transform="translate(0,28)">
+      <rect x="0" y="0" width="800" height="40" fill="rgba(255,255,255,0.85)" stroke="rgba(52,211,153,0.3)" stroke-width="0.5"/>
+      <!-- Toolbar groups (cards) -->
+      <g transform="translate(12,8)">
+        <!-- VIEW -->
+        <rect x="0" y="0" width="68" height="24" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+        <text x="6" y="10" class="toolbar-grp">View</text>
+        <rect x="6" y="13" width="26" height="9" rx="2" fill="#10b981"/>
+        <text x="19" y="20" text-anchor="middle" font-size="7" fill="#ffffff" font-weight="700">2D</text>
+        <rect x="34" y="13" width="26" height="9" rx="2" fill="rgba(52,211,153,0.15)"/>
+        <text x="47" y="20" text-anchor="middle" font-size="7" fill="#064e3b" font-weight="700">3D</text>
+
+        <!-- SURFACE -->
+        <g transform="translate(80,0)">
+          <rect x="0" y="0" width="92" height="24" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+          <text x="6" y="10" class="toolbar-grp">Surface</text>
+          <text x="6" y="20" font-size="8" fill="#064e3b" font-weight="600">Floor</text>
+          <text x="32" y="20" font-size="8" fill="rgba(6,95,70,0.5)">Ceiling</text>
+          <rect x="60" y="14" width="26" height="4" rx="2" fill="rgba(52,211,153,0.25)"/>
+          <circle cx="78" cy="16" r="3" fill="#10b981"/>
+        </g>
+
+        <!-- OVERLAY -->
+        <g transform="translate(184,0)">
+          <rect x="0" y="0" width="120" height="24" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+          <text x="6" y="10" class="toolbar-grp">Overlay</text>
+          <rect x="6" y="14" width="34" height="6" rx="3" fill="#10b981"/>
+          <text x="23" y="19.2" text-anchor="middle" font-size="6.5" fill="#ffffff" font-weight="700">Walls</text>
+          <rect x="44" y="14" width="34" height="6" rx="3" fill="rgba(52,211,153,0.25)"/>
+          <text x="61" y="19.2" text-anchor="middle" font-size="6.5" fill="#064e3b" font-weight="700">Rooms</text>
+          <rect x="82" y="16" width="32" height="2" rx="1" fill="rgba(52,211,153,0.4)"/>
+        </g>
+
+        <!-- ROOM -->
+        <g transform="translate(316,0)">
+          <rect x="0" y="0" width="68" height="24" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+          <text x="6" y="10" class="toolbar-grp">Room</text>
+          <text x="6" y="20" font-size="7.5" fill="#064e3b">Dim · Area</text>
+        </g>
+
+        <!-- OBJECT -->
+        <g transform="translate(396,0)">
+          <rect x="0" y="0" width="76" height="24" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+          <text x="6" y="10" class="toolbar-grp">Object</text>
+          <text x="6" y="20" font-size="7.5" fill="#064e3b">Distances</text>
+        </g>
+
+        <!-- PATHS -->
+        <g transform="translate(484,0)">
+          <rect x="0" y="0" width="100" height="24" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+          <text x="6" y="10" class="toolbar-grp">Paths</text>
+          <circle cx="10" cy="18" r="3" fill="#34d399"/>
+          <polygon points="20,15 28,18 20,21" fill="#10b981"/>
+          <rect x="34" y="16" width="60" height="2" rx="1" fill="rgba(52,211,153,0.4)"/>
+        </g>
+
+        <!-- Spacer + Export -->
+        <g transform="translate(700,0)">
+          <rect x="0" y="0" width="76" height="24" rx="4" fill="#10b981"/>
+          <text x="38" y="16" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700" letter-spacing="0.06em">EXPORT ▾</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ============== Body: left | canvas | right ============== -->
+    <g transform="translate(0,68)">
+
+      <!-- Left panel -->
+      <g transform="translate(0,0)">
+        <rect x="0" y="0" width="200" height="402" fill="rgba(255,255,255,0.7)" stroke="rgba(52,211,153,0.3)" stroke-width="0.5"/>
+
+        <!-- Selection card -->
+        <rect x="10" y="10" width="180" height="74" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+        <text x="18" y="24" class="panel-title">Selection</text>
+        <text x="18" y="40" class="row-label">Tiles selected</text>
+        <text x="170" y="40" text-anchor="end" class="row-value">12</text>
+        <rect x="18" y="48" width="108" height="20" rx="3" fill="#10b981"/>
+        <text x="72" y="61.5" text-anchor="middle" font-size="9" fill="#ffffff" font-weight="700" letter-spacing="0.06em">CREATE ROOM</text>
+        <rect x="132" y="48" width="40" height="20" rx="3" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)"/>
+        <text x="152" y="61.5" text-anchor="middle" font-size="8" fill="#064e3b" font-weight="700">CLEAR</text>
+
+        <!-- New-room defaults card -->
+        <rect x="10" y="94" width="180" height="98" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+        <text x="18" y="108" class="panel-title">New-room defaults</text>
+        <text x="18" y="126" class="row-label">Floor</text>
+        <rect x="148" y="120" width="34" height="10" rx="2" fill="#a7f3d0" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="142" class="row-label">Ceiling</text>
+        <rect x="148" y="136" width="34" height="10" rx="2" fill="#ecfdf5" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="158" class="row-label">Walls</text>
+        <rect x="148" y="152" width="34" height="10" rx="2" fill="#6ee7b7" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="178" class="row-label">Random per room</text>
+        <rect x="160" y="170" width="22" height="11" rx="5.5" fill="rgba(52,211,153,0.25)"/>
+        <circle cx="167" cy="175.5" r="4" fill="#ffffff" stroke="rgba(52,211,153,0.6)"/>
+
+        <!-- Project card -->
+        <rect x="10" y="202" width="180" height="190" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+        <text x="18" y="216" class="panel-title">Project</text>
+        <text x="18" y="234" class="row-label">Grid width</text>     <text x="170" y="234" text-anchor="end" class="row-value">8</text>
+        <text x="18" y="248" class="row-label">Grid depth</text>     <text x="170" y="248" text-anchor="end" class="row-value">6</text>
+        <text x="18" y="262" class="row-label">Tile size</text>      <text x="170" y="262" text-anchor="end" class="row-value">1.0 m</text>
+        <text x="18" y="276" class="row-label">Wall thickness</text> <text x="170" y="276" text-anchor="end" class="row-value">0.10 m</text>
+        <text x="18" y="290" class="row-label">Wall height</text>    <text x="170" y="290" text-anchor="end" class="row-value">2.50 m</text>
+        <text x="18" y="304" class="row-label">Door width</text>     <text x="170" y="304" text-anchor="end" class="row-value">0.90 m</text>
+        <text x="18" y="318" class="row-label">Door height</text>    <text x="170" y="318" text-anchor="end" class="row-value">2.00 m</text>
+        <line x1="18" y1="330" x2="182" y2="330" stroke="rgba(52,211,153,0.3)"/>
+        <text x="18" y="346" class="panel-title">Constraints</text>
+        <text x="18" y="362" class="row-label">Object → object</text> <text x="170" y="362" text-anchor="end" class="row-value">on</text>
+        <text x="18" y="376" class="row-label">Door → object</text>   <text x="170" y="376" text-anchor="end" class="row-value">off</text>
+      </g>
+
+      <!-- Centre canvas -->
+      <g transform="translate(200,0)">
+        <rect x="0" y="0" width="400" height="402" fill="url(#canvasFill)" stroke="rgba(52,211,153,0.25)" stroke-width="0.5"/>
+        <rect x="0" y="0" width="400" height="402" fill="url(#grid)"/>
+
+        <!-- Floor plan: two rooms with walls and a door -->
+        <!-- Room A (left, 5x4 tiles) -->
+        <rect x="50"  y="80"  width="120" height="96" fill="rgba(110,231,183,0.45)" stroke="none"/>
+        <!-- Wall ribbons (interior) -->
+        <rect x="50"  y="80"  width="120" height="6" fill="#064e3b"/>
+        <rect x="50"  y="170" width="120" height="6" fill="#064e3b"/>
+        <rect x="50"  y="80"  width="6"   height="96" fill="#064e3b"/>
+        <rect x="164" y="80"  width="6"   height="40" fill="#064e3b"/>
+        <rect x="164" y="142" width="6"   height="34" fill="#064e3b"/>
+        <!-- Door swing -->
+        <path d="M170 122 A 18 18 0 0 1 188 140" fill="none" stroke="rgba(6,95,70,0.55)" stroke-width="1"/>
+        <line x1="170" y1="122" x2="188" y2="140" stroke="rgba(6,95,70,0.55)" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="110" y="132" text-anchor="middle" font-size="11" fill="#064e3b" font-weight="700">Start box</text>
+        <text x="110" y="146" text-anchor="middle" font-size="9" fill="rgba(6,95,70,0.75)">5 × 4 · 20 m²</text>
+
+        <!-- Room B (right, 6x4 tiles) -->
+        <rect x="200" y="80"  width="144" height="96" fill="rgba(167,243,208,0.55)" stroke="none"/>
+        <rect x="200" y="80"  width="144" height="6" fill="#064e3b"/>
+        <rect x="200" y="170" width="144" height="6" fill="#064e3b"/>
+        <rect x="200" y="80"  width="6"   height="40" fill="#064e3b"/>
+        <rect x="200" y="142" width="6"   height="34" fill="#064e3b"/>
+        <rect x="338" y="80"  width="6"   height="96" fill="#064e3b"/>
+
+        <!-- A small object inside Room B -->
+        <circle cx="272" cy="128" r="6" fill="#0d9488" stroke="#064e3b" stroke-width="0.5"/>
+        <circle cx="272" cy="128" r="20" fill="none" stroke="rgba(13,148,136,0.4)" stroke-dasharray="3 3"/>
+
+        <text x="272" y="158" text-anchor="middle" font-size="11" fill="#064e3b" font-weight="700">Arena</text>
+
+        <!-- Cursor crosshair -->
+        <g transform="translate(304,256)">
+          <line x1="-7" y1="0" x2="7" y2="0" stroke="#10b981" stroke-width="1.5"/>
+          <line x1="0" y1="-7" x2="0" y2="7" stroke="#10b981" stroke-width="1.5"/>
+        </g>
+      </g>
+
+      <!-- Right panel -->
+      <g transform="translate(600,0)">
+        <rect x="0" y="0" width="200" height="402" fill="rgba(255,255,255,0.7)" stroke="rgba(52,211,153,0.3)" stroke-width="0.5"/>
+
+        <!-- Room appearance card -->
+        <rect x="10" y="10" width="180" height="220" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+        <text x="18" y="24" class="panel-title">Room appearance</text>
+        <text x="18" y="42" class="row-label">Name</text>
+        <rect x="60" y="34" width="120" height="11" rx="2" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.3)"/>
+        <text x="65" y="42.5" font-size="8" fill="#064e3b" font-weight="600">Start box</text>
+        <text x="18" y="62" class="row-label">Floor</text>
+        <rect x="148" y="56" width="34" height="10" rx="2" fill="#a7f3d0" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="78" class="row-label">Ceiling</text>
+        <rect x="148" y="72" width="34" height="10" rx="2" fill="#ecfdf5" stroke="rgba(52,211,153,0.6)"/>
+
+        <line x1="18" y1="92" x2="182" y2="92" stroke="rgba(52,211,153,0.3)"/>
+        <text x="18" y="108" class="panel-title">Walls</text>
+        <text x="18" y="124" class="row-label">Single colour</text>
+        <rect x="160" y="116" width="22" height="11" rx="5.5" fill="#10b981"/>
+        <circle cx="177" cy="121.5" r="4" fill="#ffffff"/>
+
+        <text x="18" y="144" class="row-label">North</text>
+        <rect x="148" y="138" width="34" height="10" rx="2" fill="#6ee7b7" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="160" class="row-label">East</text>
+        <rect x="148" y="154" width="34" height="10" rx="2" fill="#6ee7b7" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="176" class="row-label">South</text>
+        <rect x="148" y="170" width="34" height="10" rx="2" fill="#6ee7b7" stroke="rgba(52,211,153,0.6)"/>
+        <text x="18" y="192" class="row-label">West</text>
+        <rect x="148" y="186" width="34" height="10" rx="2" fill="#6ee7b7" stroke="rgba(52,211,153,0.6)"/>
+
+        <line x1="18" y1="206" x2="182" y2="206" stroke="rgba(52,211,153,0.3)"/>
+        <text x="18" y="222" class="panel-title">Doors &amp; windows</text>
+
+        <!-- Opening editor card -->
+        <rect x="10" y="240" width="180" height="152" rx="4" fill="#ffffff" stroke="rgba(52,211,153,0.4)"/>
+        <text x="18" y="254" class="panel-title">Opening · door</text>
+        <text x="18" y="272" class="row-label">Offset</text>     <text x="170" y="272" text-anchor="end" class="row-value">1.20 m</text>
+        <text x="18" y="288" class="row-label">Width</text>      <text x="170" y="288" text-anchor="end" class="row-value">0.90 m</text>
+        <text x="18" y="304" class="row-label">Height</text>     <text x="170" y="304" text-anchor="end" class="row-value">2.00 m</text>
+        <text x="18" y="320" class="row-label">Hinge</text>
+        <rect x="120" y="312" width="30" height="10" rx="2" fill="#10b981"/>
+        <text x="135" y="319" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">LEFT</text>
+        <rect x="152" y="312" width="30" height="10" rx="2" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)"/>
+        <text x="167" y="319" text-anchor="middle" font-size="7.5" fill="#064e3b" font-weight="700">RIGHT</text>
+        <text x="18" y="336" class="row-label">Swing</text>
+        <rect x="120" y="328" width="30" height="10" rx="2" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.4)"/>
+        <text x="135" y="335" text-anchor="middle" font-size="7.5" fill="#064e3b" font-weight="700">−</text>
+        <rect x="152" y="328" width="30" height="10" rx="2" fill="#10b981"/>
+        <text x="167" y="335" text-anchor="middle" font-size="7.5" fill="#ffffff" font-weight="700">+</text>
+      </g>
+
+    </g>
+
+    <!-- ============== Status bar ============== -->
+    <g transform="translate(0,470)">
+      <rect x="0" y="0" width="800" height="30" fill="rgba(255,255,255,0.85)" stroke="rgba(52,211,153,0.3)" stroke-width="0.5"/>
+      <text x="14" y="19" class="status">5.42, 3.18</text>
+      <circle cx="386" cy="15" r="3" class="accent-dot"/>
+      <text x="396" y="19" class="status">Wall opened</text>
+      <text x="786" y="19" text-anchor="end" class="status">2 rooms · 1 object · Layout</text>
+    </g>
+
+  </g>
+
+  <!-- ============== Callouts ============== -->
+  <g>
+    <!-- Top toolbar -->
+    <path class="leader" d="M 480 30 L 480 78"/>
+    <text x="480" y="22" text-anchor="middle" class="label">TOP TOOLBAR</text>
+    <text x="480" y="38" text-anchor="middle" class="caption">View · Surface · Overlay · Room · Object · Paths · Export</text>
+
+    <!-- Left panel -->
+    <path class="leader" d="M 32 280 L 78 280"/>
+    <text x="14" y="270" class="label">LEFT PANEL</text>
+    <text x="14" y="284" class="caption">Selection</text>
+    <text x="14" y="296" class="caption">Defaults</text>
+    <text x="14" y="308" class="caption">Project · Constraints</text>
+
+    <!-- Canvas -->
+    <path class="leader" d="M 480 580 L 480 562"/>
+    <text x="480" y="594" text-anchor="middle" class="label">CANVAS — 2D top-down or 3D iso</text>
+    <text x="480" y="608" text-anchor="middle" class="caption">Tile painting · room / wall / opening selection · object placement</text>
+
+    <!-- Right panel -->
+    <path class="leader" d="M 928 280 L 882 280"/>
+    <text x="945" y="270" text-anchor="end" class="label">RIGHT PANEL</text>
+    <text x="945" y="284" text-anchor="end" class="caption">Room appearance</text>
+    <text x="945" y="296" text-anchor="end" class="caption">Opening editor</text>
+    <text x="945" y="308" text-anchor="end" class="caption">(or object inspector)</text>
+
+    <!-- Status bar -->
+    <path class="leader" d="M 80 552 L 60 552"/>
+    <text x="58" y="556" text-anchor="end" class="label">STATUS BAR</text>
+    <text x="58" y="568" text-anchor="end" class="caption">cursor · status · scene</text>
+  </g>
+</svg>

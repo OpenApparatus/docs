@@ -7,18 +7,7 @@ sidebar_position: 3
 
 Studio uses a three-pane docked layout with a top toolbar and a status bar. Two top-level **edit modes** — **Layout** and **Objects** — change what the side panels and the canvas show; the rest of the window stays put.
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│  [VIEW: 2D|3D]  [SURFACE]  [OVERLAY]  [ROOM] [OBJECT] [PATHS]  ⤓ │  ← top toolbar
-├────────────┬───────────────────────────────────┬─────────────────┤
-│            │                                   │                 │
-│  Left      │      Canvas (2D or 3D)            │   Right         │
-│  panel     │                                   │   panel         │
-│            │                                   │                 │
-├────────────┴───────────────────────────────────┴─────────────────┤
-│  cursor (x,y)         status / hint            rooms · objects   │  ← status bar
-└──────────────────────────────────────────────────────────────────┘
-```
+![Annotated diagram of the Studio main window showing the top toolbar, left panel, canvas, right panel, and status bar.](/img/studio/window-overview.svg)
 
 ## Top toolbar
 
