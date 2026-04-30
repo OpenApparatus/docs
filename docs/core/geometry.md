@@ -39,7 +39,7 @@ Passages between adjacent cells are rendered as **tunnels through the shared wal
 
 Each host converts `MeshData` to its own type:
 
-- **Studio** uses an Avalonia 2D top-down renderer for live preview, and an OBJ writer for export. See [Studio: OBJ export](../studio/obj-export).
+- **Studio** uses an Avalonia 2D top-down renderer for live preview, plus a software-rasterized 3D isometric view, and writes glTF, OBJ, JSON, and PNG. See [Studio: Exports](../studio/exports).
 - **Unity** has `UnityMeshAdapter` that builds a `UnityEngine.Mesh` per cell. See [Unity: Mesh adapter](../unity/mesh-adapter).
 
 ## Status
