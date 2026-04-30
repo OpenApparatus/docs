@@ -2,6 +2,7 @@
 title: Introduction
 slug: /
 sidebar_position: 1
+displayed_sidebar: coreSidebar
 ---
 
 # OpenApparatus

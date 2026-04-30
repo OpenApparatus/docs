@@ -1,6 +1,7 @@
 ---
 title: Getting started
 sidebar_position: 2
+displayed_sidebar: coreSidebar
 ---
 
 # Getting started
