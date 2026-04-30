@@ -12,7 +12,7 @@ const config: Config = {
   },
 
   url: 'https://openapparatus.github.io',
-  baseUrl: '/docs/',
+  baseUrl: '/',
 
   organizationName: 'OpenApparatus',
   projectName: 'docs',
