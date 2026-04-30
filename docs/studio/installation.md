@@ -32,7 +32,7 @@ cd openapparatus-studio
 dotnet run --project src/OpenApparatus.Studio
 ```
 
-The app will open with a default plan rendered in the preview pane.
+The app opens with the [welcome panel](./ui-tour#welcome-panel) — pick **New** to start a blank project, **Open** to load a `.oapp`, or **Shortcuts** to see the keyboard reference.
 
 ## Custom Core location
 
@@ -43,6 +43,10 @@ dotnet build -p:OpenApparatusCoreRepo=/path/to/openapparatus-core/
 ```
 
 Or set it in your shell environment so `dotnet run` picks it up.
+
+## Platforms
+
+Avalonia 11 targets Windows, macOS, and Linux from the same project. The build is x64; arm64 has not been verified.
 
 ## Future: NuGet
 
